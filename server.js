@@ -12,7 +12,7 @@ const REGIONS = {
     { city: "Kuala Lumpur", country: "MY" },
     { city: "Singapore", country: "SG" },
     { city: "Jakarta", country: "ID" },
-    { city: "Seri Begawan", country: "BN" },
+    { city: " Bandar Seri Begawan", country: "BN" },
     { city: "Bangkok", country: "TH" },
     { city: "Manila", country: "PH" },
     { city: "Phnom Penh", country: "KH" },
