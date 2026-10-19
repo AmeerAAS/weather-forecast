@@ -1,0 +1,15 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: live-weather-route
+  labels:
+    app: live-weather-app
+spec:
+  to:
+    kind: Service
+    name: live-weather-service
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

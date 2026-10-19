@@ -1,0 +1,13 @@
+{
+  "name": "openshift-live-weather",
+  "version": "1.0.0",
+  "description": "Live multi-region weather forecast dashboard for Red Hat OpenShift",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "express": "^4.19.2"
+  }
+}

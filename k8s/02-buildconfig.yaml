@@ -1,0 +1,33 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: live-weather-app
+  labels:
+    app: live-weather-app
+spec:
+  source:
+    type: Git
+    git:
+      uri: https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git
+      ref: main
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: openshift
+        name: nodejs:20-ubi9
+  output:
+    to:
+      kind: ImageStreamTag
+      name: live-weather-app:latest
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+  resources:
+    limits:
+      cpu: "1"
+      memory: "1Gi"
+    requests:
+      cpu: "200m"
+      memory: "512Mi"

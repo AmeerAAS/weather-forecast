@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global Live Weather Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Global Live Weather Forecast</h1>
+    <p>Running on Red Hat OpenShift Sandbox</p>
+    <div id="status">Loading weather metrics...</div>
+  </header>
+
+  <main id="weather-grid" class="grid"></main>
+
+  <script>
+    async function fetchWeather() {
+      const statusEl = document.getElementById('status');
+      const gridEl = document.getElementById('weather-grid');
+
+      try {
+        const res = await fetch('/api/weather');
+        const data = await res.json();
+
+        if (data.error) {
+          statusEl.innerText = 'Error: ' + data.error;
+          return;
+        }
+
+        statusEl.innerText = 'Last updated: ' + new Date(data.timestamp).toLocaleTimeString();
+        gridEl.innerHTML = '';
+
+        for (const [region, cities] of Object.entries(data.regions)) {
+          const section = document.createElement('section');
+          section.className = 'region-card';
+
+          let cityCardsHTML = cities.map(c => {
+            if (c.error) {
+              return `<div class="city-box"><strong>${c.city}</strong><span>Unavailable</span></div>`;
+            }
+            return `
+              <div class="city-box">
+                <div class="city-header">
+                  <strong>${c.city}, ${c.country}</strong>
+                  <img src="https://openweathermap.org/img/wn/${c.icon}.png" alt="${c.condition}" />
+                </div>
+                <div class="temp">${c.temp}°C</div>
+                <div class="meta">${c.condition} | Humidity: ${c.humidity}%</div>
+              </div>
+            `;
+          }).join('');
+
+          section.innerHTML = `<h2>${region}</h2><div class="city-grid">${cityCardsHTML}</div>`;
+          gridEl.appendChild(section);
+        }
+      } catch (err) {
+        statusEl.innerText = 'Failed to load weather data from backend.';
+      }
+    }
+
+    fetchWeather();
+    setInterval(fetchWeather, 300000); // Auto refresh every 5 mins
+  </script>
+</body>
+</html>
