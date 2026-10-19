@@ -9,11 +9,17 @@ const API_KEY = process.env.WEATHER_API_KEY;
 // Cities mapped by requested global regions
 const REGIONS = {
   "Asia": [
-    { city: "Tokyo", country: "JP" },
-    { city: "Singapore", country: "SG" },
     { city: "Kuala Lumpur", country: "MY" },
-    { city: "Beijing", country: "CN" },
-    { city: "Bangkok", country: "TH" }
+    { city: "Singapore", country: "SG" },
+    { city: "Jakarta", country: "ID" },
+    { city: "Seri Begawan", country: "BN" },
+    { city: "Bangkok", country: "TH" },
+    { city: "Manila", country: "PH" },
+    { city: "Phnom Penh", country: "KH" },
+    { city: "Vientiane", country: "LA" },
+    { city: "Naypyidaw", country: "MM" },
+    { city: "Dili", country: "TL" },
+    { city: "Ha Noi", country: "VN" }
   ],
   "Main Europe": [
     { city: "Paris", country: "FR" },
