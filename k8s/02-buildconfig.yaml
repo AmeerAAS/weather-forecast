@@ -8,7 +8,7 @@ spec:
   source:
     type: Git
     git:
-      uri: https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME.git
+      uri: https://github.com/AmeerAAS/weather-forecast.git
       ref: main
   strategy:
     type: Source
